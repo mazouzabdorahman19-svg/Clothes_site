@@ -1079,6 +1079,22 @@ img {
     .desktop-only { display: none; }
     .mobile-only { display: flex; }
     
+    .nav-container {
+        padding: 0 1.5rem;
+    }
+    
+    .logo {
+        position: relative;
+        left: 0;
+        transform: none;
+        font-size: 1.5rem;
+        letter-spacing: 2px;
+    }
+    
+    .nav-icons {
+        gap: 1rem;
+    }
+    
     .hero h1 { font-size: 3.5rem; }
     
     .footer-grid {
@@ -1101,21 +1117,42 @@ img {
 }
 
 @media (max-width: 576px) {
-    .container { padding: 0 1.5rem; }
+    .container { padding: 0 1.2rem; }
     .section { padding: 4rem 0; }
-    .section-title { font-size: 2rem; margin-bottom: 2rem; }
+    .section-title { font-size: 1.8rem; margin-bottom: 2rem; }
     
-    .hero h1 { font-size: 2.5rem; }
-    .hero-content { padding: 0 1rem; }
+    .nav-container {
+        padding: 0 1rem;
+    }
+    
+    .nav-icons {
+        gap: 0.6rem;
+    }
+    
+    .hero h1 { 
+        font-size: 2.3rem; 
+        line-height: 1.2;
+        margin-bottom: 1rem;
+    }
+    
+    .hero p {
+        font-size: 1rem;
+        padding: 0 1rem;
+        margin-bottom: 2rem;
+    }
+    
+    .hero-content { padding: 0; width: 100%; }
     .hero-buttons {
         flex-direction: column;
         gap: 1rem;
         width: 100%;
+        padding: 0 1rem;
     }
-    .hero-buttons .btn { width: 100%; }
+    .hero-buttons .btn { width: 100%; padding: 1.2rem; }
     
     .category-grid {
         grid-template-columns: 1fr;
+        gap: 1.5rem;
     }
     
     .product-grid {
@@ -1130,6 +1167,7 @@ img {
     
     .newsletter-form {
         flex-direction: column;
+        padding: 0 1rem;
     }
     
     .outfit-card {
@@ -1137,7 +1175,7 @@ img {
     }
     
     .cart-sidebar {
-        max-width: 100%; /* Full screen cart on mobile */
+        max-width: 100%;
     }
 }
 
