@@ -1,6 +1,7 @@
 document.addEventListener('DOMContentLoaded', () => {
     // --- Dark Mode Toggle ---
     const themeToggle = document.getElementById('theme-toggle');
+    const mobileThemeToggle = document.getElementById('mobile-theme-toggle');
     const htmlElement = document.documentElement;
 
     // Check for saved theme
@@ -8,21 +9,27 @@ document.addEventListener('DOMContentLoaded', () => {
     htmlElement.setAttribute('data-theme', savedTheme);
     updateThemeIcon(savedTheme);
 
-    themeToggle.addEventListener('click', () => {
+    function toggleTheme() {
         const currentTheme = htmlElement.getAttribute('data-theme');
         const newTheme = currentTheme === 'light' ? 'dark' : 'light';
         
         htmlElement.setAttribute('data-theme', newTheme);
         localStorage.setItem('theme', newTheme);
         updateThemeIcon(newTheme);
-    });
+    }
+
+    if (themeToggle) themeToggle.addEventListener('click', toggleTheme);
+    if (mobileThemeToggle) {
+        mobileThemeToggle.addEventListener('click', (e) => {
+            e.preventDefault();
+            toggleTheme();
+        });
+    }
 
     function updateThemeIcon(theme) {
-        if (theme === 'dark') {
-            themeToggle.innerHTML = '<i data-feather="sun"></i>';
-        } else {
-            themeToggle.innerHTML = '<i data-feather="moon"></i>';
-        }
+        const iconName = theme === 'dark' ? 'sun' : 'moon';
+        if (themeToggle) themeToggle.innerHTML = `<i data-feather="${iconName}"></i>`;
+        if (mobileThemeToggle) mobileThemeToggle.innerHTML = `<i data-feather="${iconName}"></i> Toggle Theme`;
         if (typeof feather !== 'undefined') {
             feather.replace(); // Re-render the icon
         }
@@ -322,12 +329,18 @@ document.addEventListener('DOMContentLoaded', () => {
     
     // 1. Search Icon
     const searchBtn = document.getElementById('search-btn');
-    if(searchBtn) {
-        searchBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            showToast('Search functionality coming soon!');
-        });
+    const mobileSearchBtn = document.getElementById('mobile-search-btn');
+    
+    function triggerSearch(e) {
+        e.preventDefault();
+        showToast('Search functionality coming soon.', 'info');
+        if (mobileMenu.classList.contains('active')) {
+            mobileMenu.classList.remove('active');
+        }
     }
+    
+    if(searchBtn) searchBtn.addEventListener('click', triggerSearch);
+    if(mobileSearchBtn) mobileSearchBtn.addEventListener('click', triggerSearch);
 
     // 2. Category Cards (Scroll to products and filter)
     const categoryCards = document.querySelectorAll('.category-card');
